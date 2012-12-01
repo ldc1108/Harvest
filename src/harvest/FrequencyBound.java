@@ -15,12 +15,19 @@ public class FrequencyBound implements Comparable {
     String units = "ev";
     String alt;
     
+    /**
+     * Constructor - Takes native unit freq bound value, sets that and alternate
+     * @param temp 
+     */
     public FrequencyBound(double startBound, double endBound) {
         this.startBound = startBound;
         this.endBound = endBound;
         // calculate alt bound here and set it equal
     }
     
+    /*
+     * @return bound - Freq values in native units
+     */
     public double[] getBound() {
         double[] bound = new double[2];
         bound[0] = startBound;
@@ -28,6 +35,9 @@ public class FrequencyBound implements Comparable {
         return (bound);
     }
     
+    /*
+     * @return bound - Freq values in alt units
+     */
     public double[] getAltBound() {
         double[] bound = new double[2];
         bound[0] = startBoundAlt;
@@ -35,6 +45,10 @@ public class FrequencyBound implements Comparable {
         return bound;
     }
 
+    /**
+     * Allows comparison between freq boundaries
+     * @return int - 0 iff freqs equal, -1 otherwise
+     */
    @Override
     public int compareTo(Object o) {
         try {

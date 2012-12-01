@@ -16,7 +16,7 @@ public class Density implements Comparable {
     String alt;
     
     /**
-     * Constructor - 
+     * Constructor - Takes native unit density value, sets that and alternate
      * @param dens 
      */
     public Density(double dens) {
@@ -24,14 +24,24 @@ public class Density implements Comparable {
         // calculate alt and set it here
     }
     
+    /*
+     * @return dens - Density value in native units
+     */
     public double getValue() {
         return dens;
     }
     
+    /**
+     * @return densAlt - Density value in alternative units
+     */
     public double getAltValue() {
         return densAlt;
     }
 
+    /**
+     * Allows comparison between densities
+     * @return int - 0 iff densities equal, -1 otherwise
+     */
     @Override
     public int compareTo(Object o) {
         try {

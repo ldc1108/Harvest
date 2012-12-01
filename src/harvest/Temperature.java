@@ -17,19 +17,33 @@ public class Temperature implements Comparable {
     String units = "ev";
     String alt;
     
+    /**
+     * Constructor - Takes native unit temp value, sets that and alternate
+     * @param temp 
+     */
     public Temperature(double temp) {
         this.temp = temp;
         // calculate alt and set it here
     }
     
+    /*
+     * @return temp - Temp value in native units
+     */
     public double getValue() {
         return temp;
     }
     
+    /**
+     * @return tempAlt - Temp value in alternative units
+     */
     public double getAltValue() {
         return tempAlt;
     }
 
+    /**
+     * Allows comparison between temps
+     * @return int - 0 iff temps equal, -1 otherwise
+     */
     @Override
     public int compareTo(Object o) {
         try {
