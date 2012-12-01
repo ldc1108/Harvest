@@ -14,6 +14,6 @@ public class Harvest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-            
+            // My second commit - Testing, 1 2 3...
     }
 }
