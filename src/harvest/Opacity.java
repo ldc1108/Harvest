@@ -18,9 +18,21 @@ public class Opacity extends Dependent {
      */
     public Opacity(FrequencyBound bound, Temperature temp, Density dens, 
             double nativeValue) {
-        super(bound, temp, dens, nativeValue);
-        this.units = "1/cm";
-        //calculate alternative units here
-        
+        // Note: We will not worry about opacity alt units until later stages
+        super(bound, temp, dens, nativeValue, "1/cm", "??");
+        //calculate alternative united value here
+    }
+    
+    /**
+     * Return a string of value [both native and alt] and states of D,T,FBounds
+     * @return String representation of Opacity and its states
+     */
+    @Override
+    public String toString() {
+        String str = "";
+        str += "["+this.getNativeValue() + this.getNativeUnits()+"]";
+        str += "["+this.getAltValue() + this.getAltUnits()+"]";
+        str += super.toString();
+        return str;
     }
 }

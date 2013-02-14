@@ -4,10 +4,6 @@
  */
 package harvest;
 
-import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.UIManager;
-
 /**
  * Renders GUI and Component listeners 
  * @author Ldc1108
@@ -30,7 +26,6 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         propertiesPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         browse = new javax.swing.JButton();
@@ -67,18 +62,13 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.BorderLayout(10, 10));
 
         propertiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Harvest 2.0"));
-        propertiesPanel.setName("propertiesPanel"); // NOI18N
+        propertiesPanel.setName("propertiesPanel");
         propertiesPanel.setLayout(new java.awt.GridLayout(4, 1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Data File"));
         jPanel1.setLayout(new java.awt.GridLayout(5, 2, 0, 10));
 
         browse.setText("Browse");
-        browse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseActionPerformed(evt);
-            }
-        });
         jPanel1.add(browse);
 
         browseTextArea.setText("...");
@@ -120,7 +110,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel4.setText("Units");
         propertiesGrid1.add(jLabel4);
 
-        buttonGroup1.add(densityJRadio);
         densityJRadio.setText("Density");
         densityJRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +126,6 @@ public class GUI extends javax.swing.JFrame {
         });
         propertiesGrid1.add(densityDependencyCombo);
 
-        buttonGroup1.add(temperatureJRadio);
         temperatureJRadio.setText("Temperature");
         temperatureJRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +137,6 @@ public class GUI extends javax.swing.JFrame {
         temperatureDependencyCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         propertiesGrid1.add(temperatureDependencyCombo);
 
-        buttonGroup1.add(frequencyJRadio);
         frequencyJRadio.setText("Frequency");
         propertiesGrid1.add(frequencyJRadio);
 
@@ -192,8 +179,8 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().add(propertiesPanel, java.awt.BorderLayout.LINE_START);
 
         graphPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Designed by Luke Coy"));
-        graphPanel.setName("graphPanel"); // NOI18N
-        graphPanel.setLayout(new java.awt.GridLayout(1, 0));
+        graphPanel.setName("graphPanel");
+        graphPanel.setLayout(new java.awt.GridLayout());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -231,16 +218,6 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_browseTextAreaActionPerformed
 
-    private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
-        JFileChooser fc = new JFileChooser();
-        int returnVal = fc.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File file = fc.getSelectedFile();
-                System.out.println("Opening: " + file.getAbsolutePath() + file.getName() + ".");
-                browseTextArea.setText(file.getName());
-        }
-    }//GEN-LAST:event_browseActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -255,7 +232,12 @@ public class GUI extends javax.swing.JFrame {
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -280,7 +262,6 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browse;
     private javax.swing.JTextField browseTextArea;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox densityConstantCombo;
     private javax.swing.JComboBox densityDependencyCombo;
     private javax.swing.JRadioButton densityJRadio;

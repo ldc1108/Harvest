@@ -9,15 +9,18 @@ package harvest;
  * @author Ldc1108
  */
 public class FrequencyBound implements Comparable {
-    double startBound, startBoundAlt;    
-    double endBound, endBoundAlt; 
-    
-    String units = "ev";
-    String alt;
+    private double startBound, startBoundAlt;    
+    private double endBound, endBoundAlt; 
+    /* Note: Frequency for most data comes naturally as ERGS, and you will need
+     * to compute the EV values, which will have a small round off error at time
+     */
+    private String units = "ev";
+    private String alt = "ergs";
     
     /**
-     * Constructor - Takes native unit freq bound value, sets that and alternate
-     * @param temp 
+     * Constructor takes native unit frequencies and sets those and alt units
+     * @param startBound - Starting boundary of Frequency range
+     * @param endBound  - Ending boundary of Frequency range
      */
     public FrequencyBound(double startBound, double endBound) {
         this.startBound = startBound;
@@ -25,8 +28,9 @@ public class FrequencyBound implements Comparable {
         // calculate alt bound here and set it equal
     }
     
-    /*
-     * @return bound - Freq values in native units
+    /**
+     * Returns bounds in EV units
+     * @return double[] - Array of frequency boundaries in EV unit
      */
     public double[] getBound() {
         double[] bound = new double[2];
@@ -35,8 +39,9 @@ public class FrequencyBound implements Comparable {
         return (bound);
     }
     
-    /*
-     * @return bound - Freq values in alt units
+    /**
+     * Returns bounds in EV units
+     * @return double[] - Array of frequency boundaries in ERGS unit
      */
     public double[] getAltBound() {
         double[] bound = new double[2];
@@ -46,14 +51,16 @@ public class FrequencyBound implements Comparable {
     }
 
     /**
-     * Allows comparison between freq boundaries
-     * @return int - 0 iff freqs equal, -1 otherwise
+     * Allows comparison between frequency bounds alt units (ERGS)
+     * Note: We use Alt units (ERGS) because this is readily availible in file
+     * @return integer - 0 if frequency bounds equal, -1 otherwise
      */
    @Override
     public int compareTo(Object o) {
         try {
             FrequencyBound f = (FrequencyBound)o;
-            if ((this.startBound == f.startBound) && (this.endBound == f.endBound)) {
+            if ((this.startBoundAlt == f.startBoundAlt) && 
+                    (this.endBoundAlt == f.endBoundAlt)) {
                 return 0;
             } else {
                 return -1;
@@ -63,5 +70,18 @@ public class FrequencyBound implements Comparable {
             return -1;
         }
     }
-    
+   
+   /**
+     * Prints Frequency representation: 
+     * Freq Bounds: [NativeValueBound1] [NativeValueBound2] / [AltValueBound1] 
+     *  [AltValueBound2]
+     * @return String representation of Frequency bounds
+     */
+    @Override
+    public String toString() {
+        String str = "";
+        str += "["+this.startBound + " " + this.endBound + " " + this.units + "] /";
+        str += "["+this.startBoundAlt + " " + this.endBoundAlt + " " + this.alt+"]";
+        return str;
+    }
 }

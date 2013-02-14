@@ -4,60 +4,78 @@
  */
 package harvest;
 
-import java.util.Comparator;
-
 /**
  * Temperature value for calculated dependency
  * @author Ldc1108
  */
-public class Temperature implements Comparable {
-    double temp;
-    double tempAlt;
-    
-    String units = "ev";
-    String alt;
+public class Temperature {
+    private double temp;
+    private double tempAlt;
+   
+    private String units = "ev";
+    private String alt; // Note: Not worrying about alt units until stage 2
     
     /**
-     * Constructor - Takes native unit temp value, sets that and alternate
-     * @param temp 
+     * Constructor takes native temp units (EV) and sets this and alt units
+     * @param temp - Temperature point in EV
      */
     public Temperature(double temp) {
         this.temp = temp;
         // calculate alt and set it here
     }
     
-    /*
-     * @return temp - Temp value in native units
+    /**
+     * Returns value of temp at this point in EV
+     * @return temp - Value of temperature point in EV 
      */
     public double getValue() {
         return temp;
     }
     
     /**
-     * @return tempAlt - Temp value in alternative units
+     * Returns value of temp at this point in ??
+     * @return 
      */
     public double getAltValue() {
         return tempAlt;
     }
 
     /**
-     * Allows comparison between temps
-     * @return int - 0 iff temps equal, -1 otherwise
+     * Allows comparison between temperatures native units (EV)
+     * @return integer - true if temperatures equal, false otherwise
      */
     @Override
-    public int compareTo(Object o) {
-        try {
+    public boolean equals(Object o) {
+        if (o instanceof Temperature) {
             Temperature t = (Temperature)o;
             if (this.temp == t.temp) {
-                return 0;
+                return true;
             } else {
-                return -1;
+                return false;
             }
-        } catch (ClassCastException e) {
-            System.out.println("Incorrect comparison");
-            return -1;
+        } else {
+            System.err.println("Incorrect comparison");
+            return false;
         }
     }
+
+    // NEEDS COMMENTS DO ASAP - [Needed for Hashset comparisons]
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 13 * hash + (int) (Double.doubleToLongBits(this.temp) ^ (Double.doubleToLongBits(this.temp) >>> 32));
+        return hash;
+    }
     
-    
+    /**
+     * Prints Temp representation: Temp: [NativeValue] [AltValue]
+     * @return String representation of Temp
+     */
+    @Override
+    public String toString() {
+        String str = "";
+        str += "["+this.temp + " " + this.units+"]";
+        str += "["+this.tempAlt + " " + this.alt+"]";
+        return str;
+    }
 }
