@@ -4,6 +4,8 @@
  */
 package harvest;
 
+import java.util.Objects;
+
 /**
  * Dependent class has Opacity, Emmisivity children -Each dependent defined by 
  * constants which form single value (In multiple units)
@@ -23,7 +25,9 @@ public abstract class Dependent {
      * @param bound - Frequency boundaries
      * @param temp - Temperature point
      * @param dens - Density point
-     * @param nativeUnits  - Value given constants
+     * @param nativeUnits  - Value given in constants
+     * @param units - String of units
+     * @param alt - String of alternate units
      */
     Dependent(FrequencyBound bound, Temperature temp, Density dens, 
             double nativeValue, String units, String alt) {
@@ -36,7 +40,7 @@ public abstract class Dependent {
         // set alt in opacity/emmissivty children
     }
     
-    /*
+    /**
      * Return native value of Dependent
      * @return nativeValue - returns value given constants in native units
      */
@@ -110,15 +114,40 @@ public abstract class Dependent {
         str += "Freq Bounds: " + freqBound;
         return str;
     }
-//    
-//    /**
-//     * Compares D,T,FBounds to other Dependent object
-//     * @param o - Object to compare to 
-//     * @return integer - 0 if frequency bounds equal, -1 otherwise
-//     */
-//    @Override
-//    public int compareTo(Object o) {
-//        Dependent d = (Dependent)o;
-//        if densPoint.compareTo(d.densPoint) {
-//    }
+    
+    /**
+     * Tests equality using D,T,FBounds to other Dependent object
+     * @param o - Object to compare to 
+     * @return boolean - true if frequency bounds equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Dependent) {
+            Dependent d = (Dependent)o;
+            if (densPoint.equals(d.getDensPoint()) && tempPoint.equals(d.getTempPoint()) 
+                    && freqBound.equals(d.getFreqBound()) && (nativeValue==d.getNativeValue())) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            System.err.println("Incorrect comparison");
+            return false;
+        }
+    }
+
+    /**
+     * Hash code needs to be defined so HashSet<> contain methods look in the
+     * correct hash "bucket"
+     * @return hash - integer corresponding to hash code
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash += 73 * hash + (int) (Double.doubleToLongBits(this.nativeValue) ^ (Double.doubleToLongBits(this.nativeValue) >>> 32));
+        hash += 73 * hash + Objects.hashCode(this.freqBound);
+        hash += 73 * hash + Objects.hashCode(this.tempPoint);
+        hash += 73 * hash + Objects.hashCode(this.densPoint);
+        return hash;
+    }
 }

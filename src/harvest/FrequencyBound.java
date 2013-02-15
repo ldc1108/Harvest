@@ -8,19 +8,19 @@ package harvest;
  * Frequency bound gives range of frequency for which dependency data is found
  * @author Ldc1108
  */
-public class FrequencyBound implements Comparable {
+public class FrequencyBound {
     private double startBound, startBoundAlt;    
     private double endBound, endBoundAlt; 
     /* Note: Frequency for most data comes naturally as ERGS, and you will need
      * to compute the EV values, which will have a small round off error at time
      */
-    private String units = "ev";
-    private String alt = "ergs";
+    private final String units = "erg";
+    private final String alt = "ev";
     
     /**
      * Constructor takes native unit frequencies and sets those and alt units
-     * @param startBound - Starting boundary of Frequency range
-     * @param endBound  - Ending boundary of Frequency range
+     * @param startBound - Starting boundary of Frequency range (ergs)
+     * @param endBound  - Ending boundary of Frequency range (ergs)
      */
     public FrequencyBound(double startBound, double endBound) {
         this.startBound = startBound;
@@ -29,10 +29,10 @@ public class FrequencyBound implements Comparable {
     }
     
     /**
-     * Returns bounds in EV units
-     * @return double[] - Array of frequency boundaries in EV unit
+     * Returns bounds in erg units
+     * @return double[] - Array of frequency boundaries in erg unit
      */
-    public double[] getBound() {
+    public double[] getValue() {
         double[] bound = new double[2];
         bound[0] = startBound;
         bound[1] = endBound;
@@ -41,34 +41,62 @@ public class FrequencyBound implements Comparable {
     
     /**
      * Returns bounds in EV units
-     * @return double[] - Array of frequency boundaries in ERGS unit
+     * @return double[] - Array of frequency boundaries in EV unit
      */
-    public double[] getAltBound() {
+    public double[] getAltValue() {
         double[] bound = new double[2];
         bound[0] = startBoundAlt;
         bound[1] = endBoundAlt;
         return bound;
     }
+    
+    /**
+     * Returns native units in string
+     * @return units - Native units for frequency
+     */
+    public String getNativeUnits() {
+        return units;
+    }
+    
+    /**
+     * Returns alternative units in string
+     * @return alt - Alternative units for frequency
+     */
+    public String getAltUnits() {
+        return alt;
+    }
 
     /**
-     * Allows comparison between frequency bounds alt units (ERGS)
-     * Note: We use Alt units (ERGS) because this is readily availible in file
-     * @return integer - 0 if frequency bounds equal, -1 otherwise
+     * Test equality between frequency bounds
+     * @return boolean - true if frequency bounds equal, false otherwise
      */
    @Override
-    public int compareTo(Object o) {
-        try {
+    public boolean equals(Object o) {
+        if (o instanceof FrequencyBound) {
             FrequencyBound f = (FrequencyBound)o;
-            if ((this.startBoundAlt == f.startBoundAlt) && 
-                    (this.endBoundAlt == f.endBoundAlt)) {
-                return 0;
+            if ((this.startBound == f.startBound) && 
+                    (this.endBound == f.endBound)) {
+                return true;
             } else {
-                return -1;
+                return false;
             }
-        } catch (ClassCastException e) {
+        } else {
             System.out.println("Incorrect comparison");
-            return -1;
+            return false;
         }
+    }
+
+    /**
+     * Hash code needs to be defined so HashSet<> contain methods look in the
+     * correct hash "bucket"
+     * @return hash - integer corresponding to hash code
+     */
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash += 59 * hash + (int) (Double.doubleToLongBits(this.startBound) ^ (Double.doubleToLongBits(this.startBound) >>> 32));
+        hash += 59 * hash + (int) (Double.doubleToLongBits(this.endBound) ^ (Double.doubleToLongBits(this.endBound) >>> 32));
+        return hash;
     }
    
    /**
@@ -79,7 +107,7 @@ public class FrequencyBound implements Comparable {
      */
     @Override
     public String toString() {
-        String str = "";
+        String str = "FBound:";
         str += "["+this.startBound + " " + this.endBound + " " + this.units + "] /";
         str += "["+this.startBoundAlt + " " + this.endBoundAlt + " " + this.alt+"]";
         return str;

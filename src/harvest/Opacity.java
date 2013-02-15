@@ -35,4 +35,34 @@ public class Opacity extends Dependent {
         str += super.toString();
         return str;
     }
+    /**
+     * Tests equality for Opacity to other Dependent object
+     * @param o - Object to compare to 
+     * @return boolean - true if frequency bounds equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Opacity) {
+            Opacity op = (Opacity)o;
+            if (super.equals(o)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            System.err.println("Invalid comparison");
+            return false;
+        }
+    }
+
+    /**
+     * Hash code needs to be defined so HashSet<> contain methods look in the
+     * correct hash "bucket"
+     * @return hash - integer corresponding to hash code
+     */
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
 }
