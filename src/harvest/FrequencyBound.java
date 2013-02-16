@@ -94,8 +94,8 @@ public class FrequencyBound {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash += 59 * hash + (int) (Double.doubleToLongBits(this.startBound) ^ (Double.doubleToLongBits(this.startBound) >>> 32));
-        hash += 59 * hash + (int) (Double.doubleToLongBits(this.endBound) ^ (Double.doubleToLongBits(this.endBound) >>> 32));
+        hash = 59 * hash + (int) (Double.doubleToLongBits(this.startBound) ^ (Double.doubleToLongBits(this.startBound) >>> 32));
+        hash = 59 * hash + (int) (Double.doubleToLongBits(this.endBound) ^ (Double.doubleToLongBits(this.endBound) >>> 32));
         return hash;
     }
    

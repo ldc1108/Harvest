@@ -144,10 +144,10 @@ public abstract class Dependent {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash += 73 * hash + (int) (Double.doubleToLongBits(this.nativeValue) ^ (Double.doubleToLongBits(this.nativeValue) >>> 32));
-        hash += 73 * hash + Objects.hashCode(this.freqBound);
-        hash += 73 * hash + Objects.hashCode(this.tempPoint);
-        hash += 73 * hash + Objects.hashCode(this.densPoint);
+        hash = 73 * hash + (int) (Double.doubleToLongBits(this.nativeValue) ^ (Double.doubleToLongBits(this.nativeValue) >>> 32));
+        hash = 73 * hash + Objects.hashCode(this.freqBound);
+        hash = 73 * hash + Objects.hashCode(this.tempPoint);
+        hash = 73 * hash + Objects.hashCode(this.densPoint);
         return hash;
     }
 }

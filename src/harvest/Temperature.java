@@ -87,7 +87,7 @@ public class Temperature implements Independent {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash += 13 * hash + (int) (Double.doubleToLongBits(this.temp) ^ (Double.doubleToLongBits(this.temp) >>> 32));
+        hash = 13 * hash + (int) (Double.doubleToLongBits(this.temp) ^ (Double.doubleToLongBits(this.temp) >>> 32));
         return hash;
     }
     

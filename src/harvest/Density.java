@@ -96,8 +96,8 @@ public class Density implements Independent {
      */
     public String toString() {
         String str = "D:";
-        str += "["+this.dens + " " + this.units+"]";
-        str += "["+this.densAlt + " " + this.alt+"]";
+        str = "["+this.dens + " " + this.units+"]";
+        str = "["+this.densAlt + " " + this.alt+"]";
         return str;
     }
 }
