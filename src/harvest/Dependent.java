@@ -109,9 +109,9 @@ public abstract class Dependent {
     @Override
     public String toString() {
         String str = "";
-        str += "Dens: " + densPoint;
-        str += "Temp: " + tempPoint;
-        str += "Freq Bounds: " + freqBound;
+        str += densPoint;
+        str += tempPoint;
+        str += freqBound;
         return str;
     }
     

@@ -107,9 +107,9 @@ public class FrequencyBound {
      */
     @Override
     public String toString() {
-        String str = "FBound:";
-        str += "["+this.startBound + " " + this.endBound + " " + this.units + "] /";
-        str += "["+this.startBoundAlt + " " + this.endBoundAlt + " " + this.alt+"]";
+        String str = "FBound: \n";
+        str += "["+this.startBound + " " + this.endBound + " " + this.units + "] \n";
+        str += "["+this.startBoundAlt + " " + this.endBoundAlt + " " + this.alt+"] \n";
         return str;
     }
 }

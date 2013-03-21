@@ -1,0 +1,15 @@
+This project (Harvest) is subject to the terms and conditions defined in
+file 'LICENSE.txt', which is part of this source code package;
+(../Harvest/src/harvest/LICENSE.txt)
+
+Requirements Specifications
+
+-------------------------------------------------
+
+- Log / Linear (Log should start at 0)
+- Alternative unit display
+- Information Display on Graph (Compound, Constants, Time Created)
+- Point / Line visibility?
+- File search in Open dialogue
+- XY Coordinate Display on click on point
+- For Dev: Please look at Spirals for detailed Spec

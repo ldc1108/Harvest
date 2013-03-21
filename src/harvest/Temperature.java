@@ -97,9 +97,9 @@ public class Temperature implements Independent {
      */
     @Override
     public String toString() {
-        String str = "T:";
-        str += "["+this.temp + " " + this.units+"]";
-        str += "["+this.tempAlt + " " + this.alt+"]";
+        String str = "Temp: \n";
+        str += "["+this.temp + " " + this.units+"] \n";
+        str += "["+this.tempAlt + " " + this.alt+"] \n";
         return str;
     }
 }

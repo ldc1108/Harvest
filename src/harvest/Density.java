@@ -9,8 +9,8 @@ package harvest;
  * @author Ldc1108
  */
 public class Density implements Independent {
-    double dens;
-    double densAlt;
+    private double dens;
+    private double densAlt;
     
     private final String units = "g/cc";
     private final String alt = "D alt";// Note - Alt units not priority @ stage 1
@@ -95,9 +95,9 @@ public class Density implements Independent {
      * @return String representation of Density
      */
     public String toString() {
-        String str = "D:";
-        str = "["+this.dens + " " + this.units+"]";
-        str = "["+this.densAlt + " " + this.alt+"]";
+        String str = "Dens: \n";
+        str += "["+this.dens + " " + this.units+"] \n";
+        str += "["+this.densAlt + " " + this.alt+"] \n";
         return str;
     }
 }

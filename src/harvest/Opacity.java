@@ -29,9 +29,9 @@ public class Opacity extends Dependent {
      */
     @Override
     public String toString() {
-        String str = "";
-        str += "["+this.getNativeValue() + this.getNativeUnits()+"]";
-        str += "["+this.getAltValue() + this.getAltUnits()+"]";
+        String str = "Opac: \n";
+        str += "["+this.getNativeValue() + this.getNativeUnits()+"] \n";
+        str += "["+this.getAltValue() + this.getAltUnits()+"] \n";
         str += super.toString();
         return str;
     }

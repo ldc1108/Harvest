@@ -1,12 +1,12 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE.txt', which is part of this source code package.
  */
 package harvest;
 
 import java.util.HashSet;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
@@ -45,6 +45,7 @@ public class DependentTest {
         boolean expResult = true;
         HashSet<Dependent> h = new HashSet<>();
         h.add(instance);
+        // Note: Suspicious call (Expects Dependent, but receives Object) intentional
         boolean result = h.contains(o);
         assertEquals(expResult, result);
     }
